@@ -1,7 +1,24 @@
-### Code to generate clustered (correlated) multicategory data
-### based on: Biswas A (2004). Generating Correlated Ordinal Random Samples. Stat Probs & Letters
+#' Generate Correlated Clustered Categorical Data
+#'
+#' @param rho Numeric value between 0 and 1 of the desired ICC value.
+#' @param prop Numeric vector of each response category's probability, each taking value between 0 and 1.
+#' @param prvar Numeric value or vector of values between 0 and 1 denoting percent variation in each assumed event rate. Default is 0.
+#' @param noc Numeric value of number of clusters to be generated.
+#' @param csize Numeric value of desired cluster size.
+#' @param csvar Numeric value between 0 and 1 denoting percent variation in cluster sizes. Default is 0.
+#' @param allevtcl Logical value specifying whether all clusters must have all categories. Default is True.
+#' @param drawn Maximum number of attempts to apply variation to event probabilities.
+#' @param nowarnings Flag to turn off warnings. Default is False.
+#'
+#' @return Dataframe with two columns, a column identifier 'cid' and categorical response 'y'
+#' @export
+#'
+#' @examples
+#' rccat(rho=0.2, prop=c(0.2, 0.3, 0.5), prvar=0, noc=5, csize=20, csvar=0.2)
 rccat = function(rho, prop, prvar=0, noc, csize, csvar=0, allevtcl=TRUE,
                          drawn=10, nowarnings=FALSE){
+  ### Code to generate clustered (correlated) multicategory data
+  ### based on: Biswas A (2004). Generating Correlated Ordinal Random Samples. Stat Probs & Letters
   ### Code to generate clustered (correlated) multicategory data ###
   # rho        = numeric value between 0 and 1 of the assumed ICC value
   # prop       = numeric vector of each response category's probability, each

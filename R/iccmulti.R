@@ -1,10 +1,37 @@
-# ICC estimation function that runs on (any) number of categories (2+)
+#' Estimate ICC for nominal or ordinal categorical response data
+#'
+#' @param cid Cluster id variable.
+#' @param y Categorical response variable.
+#' @param data Dataframe containing 'cid' and 'y'.
+#' @param alpha Significance level for confidence interval computation. Default is 0.05.
+#' @param method Method used to estimate categorical ICC. A single method or multiple methods can be specified. Default is both resampling and moments estimators. See iccmult::iccmulti for more details.
+#' @param binmethod Method used to estimate binary ICC. A single or multiple methods can be specified. By default all 16 methods are returned. See full details in ICCbin::iccbin().
+#' @param ci.type Type of confidence interval to be computed for binary ICC. By default, all 5 types will be returned See full details in ICCbin::iccbin() for more.
+#' @param kappa Value of Kappa to be used in computing Stabilized ICC when the binary response method 'stab' is chosen. Default value is 0.45.
+#' @param nAGQ An integer scaler, as in lme4::glmer(), denoting the number of points per axis for evaluating the adaptive Gauss-Hermite approximation to the log-likelihood. Used when the binary response method 'lin' is chosen. Default value is 1.
+#' @param M Number of Monte Carlo replicates used in binary ICC computation method 'sim'. Default is 1000.
+#' @param nowarnings Flag to turn off warnings. Default is False.
+#'
+#' @return Data frame or list of data frames with single column estimate of ICC, se(ICC), and lower and upper CI bounds.
+#'
+#' @importFrom stats na.omit qnorm rnorm runif
+#' @importFrom gtools permutations
+#' @importFrom dirmult weirMoM
+#' @import ICCbin
+#' @import lme4
+#' @import dirmult
+#' @export
+#'
+#' @examples
+#' iccdat4 <- rccat(rho=0.3, prop=c(0.15,0.25,0.20,0.40), noc=10, csize=25)
+#' iccmulti(cid, y, iccdat4)
 iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
                     binmethod = c("aov", "aovs", "keq", "kpr", "keqs",
                                   "kprs", "stab", "ub", "fc", "mak", "peq",
                                   "pgp", "ppr", "rm", "lin", "sim"),
                     ci.type = c("aov", "wal", "fc", "peq", "rm"),
                     kappa = 0.45, nAGQ = 1, M = 1000, nowarnings=FALSE){
+  # ICC estimation function that runs on (any) number of categories (2+)
   # cid       = Column name indicating cluster id in dataframe data
   # y         = Column name indicating categorical response in data frame `data'
   # data      = Dataframe containing `cid' and `y'
@@ -15,10 +42,10 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   #             & moments methods. See Details of iccmult::iccmulti() for more.
   # binmethod = Method used to compute binary ICC. A single or multiple methods
   #             can be specified. By default, all 16 methods will be used. See
-  #             details of iccBIN::iccbin() for more.
+  #             details of ICCbin::iccbin() for more.
   # ci.type   = Type of confidence interval to be computed for binary ICC. By
   #             default, all 5 types will be reported. See details of
-  #             iccBIN::iccbin() for more.
+  #             ICCbin::iccbin() for more.
   # kappa     = Value of Kappa to be used in computing Stabilized ICC when the
   #             binary response method stab is chosen. Default value is 0.45.
   # nAGQ      = An integer scaler, as in glmer function of package lme4,
@@ -28,16 +55,15 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   #             value is 1.
   # M         = Number of Monte Carlo replicates used in ICC computation method
   #             sim. Default is 1000.
-  # nowarnings = flag to turn off warnings. Default is False.
+  # nowarnings = Flag to turn off warnings. Default is False.
 
   ##~~~ NOTE: ICCbin::iccbin may return an error between lmer and Matrix package
   ##~~~ when method=lin or sim. Run the following install call to avoid this
   ##~~~ error:
   ##~~~ > install.packages("lme4", type = "source")
 
-  require("ICCbin")
-  require("lme4")
-  require("dirmult")
+  requireNamespace("ICCbin","lme4","dirmult","gtools")
+  # importFrom("stats", "na.omit", "qnorm", "rnorm", "runif")
   if(nowarnings==TRUE) options(warn=-1)
 
   CALL <- match.call()
@@ -106,9 +132,11 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
 
   if(ncat>=3){
     if("rm" %in% method){
-      warns=NULL
+      warns = NULL
 
       for(i in 1:ncat){
+        ysub = NULL
+
         # ICC for component i vs others
         cordatap = cordata;
         cordatap$ysub = ifelse(cordatap$y==yvals[i],1,0)
@@ -237,9 +265,13 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
 
     }
     if("mom" %in% method){
+        if (!requireNamespace("dirmult", quietly = TRUE)) {
+          stop("Package 'dirmult' is needed for method 'mom'. Please install it.",
+               call. = FALSE)
+        }
       #################################
       ## X-category MoM ICC estimate ##
-      moms = weirMoM(as.matrix(table(cordata$cid,cordata$y)),se=T)
+      moms = dirmult::weirMoM(as.matrix(table(cordata$cid,cordata$y)),se=T)
       rhomom = moms$theta
       rhomomse = moms$se
 

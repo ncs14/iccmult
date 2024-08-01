@@ -1,12 +1,22 @@
 Package: iccmult
-Title: What the Package Does (One Line, Title Case)
+Title: Intracluster Correlation Estimation for Nominal and Ordinal Data
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Nicole", "Solomon", , "nicole.solomon@duke.edu", role = c("aut", "cre"))
+Description: The intra-cluster correlation coefficient (ICC) is a critical
+    parameter in cluster-randomized trials and is used to estimate average
+    within-clusters correlation. A new resampling based approach has been
+    developed for categorical nominal or ordinal response data with more
+    than two categories. The method of moments (MoM) method, originally
+    developed to characterize population genetic structure, has also been
+    translated to the context of cluster randomized trials.
+License: MIT + file LICENSE
+Imports: 
+    dirmult,
+    gtools,
+    ICCbin,
+    lme4,
+    stats
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
