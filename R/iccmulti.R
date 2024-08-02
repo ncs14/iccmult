@@ -91,7 +91,7 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   if (is.character(ic$cid) && length(ic$cid) == 1)
     ic$cid <- eval(as.name(ic$cid), data, parent.frame())
   dt <- data.frame(ic)
-  dt <- na.omit(dt)
+  dt <- stats::na.omit(dt)
   k <- length(unique(dt$cid))
   if (!is.null(attributes(dt)$na.action)) {
     warning(cat("NAs removed from data rows:\n", unclass(attributes(dt)$na.action),
