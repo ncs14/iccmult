@@ -152,7 +152,6 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
 
         # Check if ICC estimable:
         if(ib$estimates[,"ICC"]=="-"){ rho = c(rho,NA) }else{ rho = c(rho,ib$estimates[,"ICC"])}
-        # rho = ifelse(ib$estimates[,"ICC"]!="-",c(rho,ib$estimates[,"ICC"]),c(rho,NA))
 
         # Check if CI estimable:
         sumci = sum(ib$ci[,c("LowerCI","UpperCI")]==rep("-",2))
@@ -190,7 +189,7 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
             ib = iball$result
 
             # Check if ICC estimable:
-            rho = ifelse(ib$estimates[,"ICC"]!="-",c(rho,ib$estimates[,"ICC"]),c(rho,NA))
+            if(ib$estimates[,"ICC"]=="-"){ rho = c(rho,NA) }else{ rho = c(rho,ib$estimates[,"ICC"])}
 
             # Check if CI estimable:
             sumci = sum(ib$ci[,c("LowerCI","UpperCI")]==rep("-",2))
