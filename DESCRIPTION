@@ -1,6 +1,6 @@
 Package: iccmult
 Title: Intracluster Correlation Estimation for Nominal and Ordinal Data
-Version: 0.0.1
+Version: 1.0.0
 Authors@R: 
     person("Nicole", "Solomon", , "nicole.solomon@duke.edu", role = c("aut", "cre"))
 Description: The intra-cluster correlation coefficient (ICC) is a critical
