@@ -12,7 +12,7 @@
 #' @param M Number of Monte Carlo replicates used in binary ICC computation method 'sim'. Default is 1000.
 #' @param nowarnings Flag to turn off warnings. Default is False.
 #'
-#' @return Data frame or list of data frames with single column estimate of ICC, se(ICC), and lower and upper CI bounds.
+#' @returns Data frame or list of data frames with single column estimate of ICC, se(ICC), and lower and upper CI bounds.
 #'
 #' @importFrom stats na.omit qnorm rnorm runif
 #' @importFrom gtools permutations
@@ -23,8 +23,10 @@
 #' @export
 #'
 #' @examples
-#' iccdat4 <- rccat(rho=0.3, prop=c(0.15,0.25,0.20,0.40), noc=10, csize=25)
-#' iccmulti(cid, y, iccdat4)
+#' iccdat4 <- rccat(rho=0.15, prop=c(0.15,0.25,0.20,0.40), noc=10, csize=25)
+#' iccmulti(cid=cid, y=y, data=iccdat4)
+#' iccdat3 <- rccat(rho=0.10, prop=c(0.30,0.25,0.45), noc=15, csize=50)
+#' iccmulti(cid=cid, y=y, data=iccdat3)
 iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
                     binmethod = c("aov", "aovs", "keq", "kpr", "keqs",
                                   "kprs", "stab", "ub", "fc", "mak", "peq",

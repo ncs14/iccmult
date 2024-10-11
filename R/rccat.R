@@ -10,11 +10,12 @@
 #' @param drawn Maximum number of attempts to apply variation to event probabilities.
 #' @param nowarnings Flag to turn off warnings. Default is False.
 #'
-#' @return Dataframe with two columns, a column identifier 'cid' and categorical response 'y'
+#' @returns Dataframe with two columns, a column identifier 'cid' and categorical response 'y', and one row for each observation within each cluster
 #' @export
 #'
 #' @examples
 #' rccat(rho=0.2, prop=c(0.2, 0.3, 0.5), prvar=0, noc=5, csize=20, csvar=0.2)
+#' rccat(rho=0.1, prop=c(0.2, 0.4, 0.3, 0.1), prvar=0.10, noc=30, csize=40, csvar=0)
 rccat = function(rho, prop, prvar=0, noc, csize, csvar=0, allevtcl=TRUE,
                          drawn=10, nowarnings=FALSE){
   ### Code to generate clustered (correlated) multicategory data

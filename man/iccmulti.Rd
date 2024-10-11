@@ -49,6 +49,8 @@ Data frame or list of data frames with single column estimate of ICC, se(ICC), a
 Estimate ICC for nominal or ordinal categorical response data
 }
 \examples{
-iccdat4 <- rccat(rho=0.3, prop=c(0.15,0.25,0.20,0.40), noc=10, csize=25)
-iccmulti(cid, y, iccdat4)
+iccdat4 <- rccat(rho=0.15, prop=c(0.15,0.25,0.20,0.40), noc=10, csize=25)
+iccmulti(cid=cid, y=y, data=iccdat4)
+iccdat3 <- rccat(rho=0.10, prop=c(0.30,0.25,0.45), noc=15, csize=50)
+iccmulti(cid=cid, y=y, data=iccdat3)
 }
