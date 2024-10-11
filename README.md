@@ -54,6 +54,9 @@ both the resampling and the moments estimates.
 
 ``` r
 iccclust <- iccmulti(cid, y, clustdat3, method=c("rm","mom"))
+#> Warning in iccmulti(cid, y, clustdat3, method = c("rm", "mom")): One or both of
+#> 'Resampling based' confidence limits fell outside of [0, 1] for at least one
+#> categorical calculation
 ```
 
 The result is a list of length two, each component holding the estimated
