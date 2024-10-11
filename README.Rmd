@@ -16,23 +16,24 @@ knitr::opts_chunk$set(
 # iccmult
 
 <!-- badges: start -->
+[![Codecov test coverage](https://codecov.io/gh/ncs14/iccmult/graph/badge.svg)](https://app.codecov.io/gh/ncs14/iccmult)
 <!-- badges: end -->
 
 The goal of iccmult is to estimate the intracluster correlation coefficient (ICC) of clustered categorical response data. It provides two estimation methods, a resampling based estimator and the method of moments estimator. These are obtained by specifying a method in the function `iccmulti::iccmult()`. This package also includes a function to generate simulated clustered categorical response data: `iccmulti::rccat()`.
 
 ## Installation
 
-You can install the development version of iccmult from [GitHub](https://github.com/) with:
+You can install iccmult from within R or RStudio with:
+
+``` r
+install.packages("iccmult")
+```
+
+Alternatively, install the package from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("pak")
 pak::pak("ncs14/iccmult")
-```
-
-Alternatively, install the package from within R or RStudio with:
-
-``` r
-install.packages("iccmult")
 ```
 
 ## Example

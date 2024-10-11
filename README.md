@@ -4,6 +4,9 @@
 # iccmult
 
 <!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/ncs14/iccmult/graph/badge.svg)](https://app.codecov.io/gh/ncs14/iccmult)
 <!-- badges: end -->
 
 The goal of iccmult is to estimate the intracluster correlation
@@ -16,18 +19,18 @@ generate simulated clustered categorical response data:
 
 ## Installation
 
-You can install the development version of iccmult from
-[GitHub](https://github.com/) with:
+You can install iccmult from within R or RStudio with:
+
+``` r
+install.packages("iccmult")
+```
+
+Alternatively, install the package from [GitHub](https://github.com/)
+with:
 
 ``` r
 # install.packages("pak")
 pak::pak("ncs14/iccmult")
-```
-
-Alternatively, install the package from within R or RStudio with:
-
-``` r
-install.packages("iccmult")
 ```
 
 ## Example
