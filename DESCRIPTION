@@ -11,7 +11,7 @@ Description: Assists in generating categorical clustered outcome data,
     estimating the Intracluster Correlation Coefficient (ICC) for nominal or 
     ordinal data with 2+ categories under the resampling and method of moments 
     (MoM) methods, with confidence intervals.
-BugReports: https://github.com/ncs14/iccmult/issues/1
+BugReports: https://github.com/ncs14/iccmult/issues/
 License: MIT + file LICENSE
 Imports: 
     dirmult,
