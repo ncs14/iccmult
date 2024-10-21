@@ -10,6 +10,7 @@
 #' @param kappa Value of Kappa to be used in computing Stabilized ICC when the binary response method 'stab' is chosen. Default value is 0.45.
 #' @param nAGQ An integer scaler, as in lme4::glmer(), denoting the number of points per axis for evaluating the adaptive Gauss-Hermite approximation to the log-likelihood. Used when the binary response method 'lin' is chosen. Default value is 1.
 #' @param M Number of Monte Carlo replicates used in binary ICC computation method 'sim'. Default is 1000.
+#' @param nowarnings Flag to turn off estimation warnings. Default is False.
 #'
 #' @returns Data frame or list of data frames with single column estimate of ICC, se(ICC), and lower and upper CI bounds.
 #'
@@ -31,7 +32,7 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
                                   "kprs", "stab", "ub", "fc", "mak", "peq",
                                   "pgp", "ppr", "rm", "lin", "sim"),
                     ci.type = c("aov", "wal", "fc", "peq", "rm"),
-                    kappa = 0.45, nAGQ = 1, M = 1000){
+                    kappa = 0.45, nAGQ = 1, M = 1000, nowarnings=FALSE){
   # ICC estimation function that runs on (any) number of categories (2+)
   # cid       = Column name indicating cluster id in dataframe data
   # y         = Column name indicating categorical response in data frame `data'
@@ -56,6 +57,7 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   #             value is 1.
   # M         = Number of Monte Carlo replicates used in ICC computation method
   #             sim. Default is 1000.
+  # nowarnings = Flag to turn off estimation warnings. Default is False.
 
   ##~~~ NOTE: ICCbin::iccbin may return an error between lmer and Matrix package
   ##~~~ when method=lin or sim. Run the following install call to avoid this
