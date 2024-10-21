@@ -318,6 +318,5 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
     out=ib
   }
 
-  options(warn=0)
   return(out)
 }

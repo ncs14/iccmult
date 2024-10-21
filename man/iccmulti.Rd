@@ -15,7 +15,8 @@ iccmulti(
   ci.type = c("aov", "wal", "fc", "peq", "rm"),
   kappa = 0.45,
   nAGQ = 1,
-  M = 1000
+  M = 1000,
+  nowarnings = FALSE
 )
 }
 \arguments{
@@ -38,6 +39,8 @@ iccmulti(
 \item{nAGQ}{An integer scaler, as in lme4::glmer(), denoting the number of points per axis for evaluating the adaptive Gauss-Hermite approximation to the log-likelihood. Used when the binary response method 'lin' is chosen. Default value is 1.}
 
 \item{M}{Number of Monte Carlo replicates used in binary ICC computation method 'sim'. Default is 1000.}
+
+\item{nowarnings}{Flag to turn off estimation warnings. Default is False.}
 }
 \value{
 Data frame or list of data frames with single column estimate of ICC, se(ICC), and lower and upper CI bounds.
