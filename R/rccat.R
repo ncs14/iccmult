@@ -256,8 +256,3 @@ rccat = function(rho, prop, prvar=0, noc, csize, csvar=0, allevtcl=TRUE,
   if(length(prop)>2) out$y = out$y+1
   return(out)
 }
-
-### Example call:
-# rccat(rho=0.20, prop=c(0.35,0.5,0.15), prvar=0, noc=20, csize=50, csvar=0)
-
-

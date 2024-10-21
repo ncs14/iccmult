@@ -10,7 +10,6 @@
 #' @param kappa Value of Kappa to be used in computing Stabilized ICC when the binary response method 'stab' is chosen. Default value is 0.45.
 #' @param nAGQ An integer scaler, as in lme4::glmer(), denoting the number of points per axis for evaluating the adaptive Gauss-Hermite approximation to the log-likelihood. Used when the binary response method 'lin' is chosen. Default value is 1.
 #' @param M Number of Monte Carlo replicates used in binary ICC computation method 'sim'. Default is 1000.
-#' @param nowarnings Flag to turn off warnings. Default is False.
 #'
 #' @returns Data frame or list of data frames with single column estimate of ICC, se(ICC), and lower and upper CI bounds.
 #'
@@ -32,7 +31,7 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
                                   "kprs", "stab", "ub", "fc", "mak", "peq",
                                   "pgp", "ppr", "rm", "lin", "sim"),
                     ci.type = c("aov", "wal", "fc", "peq", "rm"),
-                    kappa = 0.45, nAGQ = 1, M = 1000, nowarnings=FALSE){
+                    kappa = 0.45, nAGQ = 1, M = 1000){
   # ICC estimation function that runs on (any) number of categories (2+)
   # cid       = Column name indicating cluster id in dataframe data
   # y         = Column name indicating categorical response in data frame `data'
@@ -57,7 +56,6 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   #             value is 1.
   # M         = Number of Monte Carlo replicates used in ICC computation method
   #             sim. Default is 1000.
-  # nowarnings = Flag to turn off warnings. Default is False.
 
   ##~~~ NOTE: ICCbin::iccbin may return an error between lmer and Matrix package
   ##~~~ when method=lin or sim. Run the following install call to avoid this
@@ -65,8 +63,6 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   ##~~~ > install.packages("lme4", type = "source")
 
   requireNamespace("ICCbin","lme4","dirmult","gtools")
-  # importFrom("stats", "na.omit", "qnorm", "rnorm", "runif")
-  if(nowarnings==TRUE) options(warn=-1)
 
   CALL <- match.call()
   ic <- list(cid = substitute(cid), y = substitute(y))
@@ -96,8 +92,7 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   dt <- stats::na.omit(dt)
   k <- length(unique(dt$cid))
   if (!is.null(attributes(dt)$na.action)) {
-    warning(cat("NAs removed from data rows:\n", unclass(attributes(dt)$na.action),
-                "\n"))
+    warning("NAs removed from data rows:\n", paste0(unclass(attributes(dt)$na.action),collapse=","), "\n")
   }
   if (!is.factor(dt$cid)) {
     warning("'cid' has been coerced to a factor")
@@ -324,6 +319,3 @@ iccmulti = function(cid, y, data, alpha=0.05, method=c("rm","mom"),
   options(warn=0)
   return(out)
 }
-
-### Example call:
-# iccmulti(rho=0.20, prop=c(0.35,0.5,0.15), prvar=0, noc=20, csize=50, csvar=0)

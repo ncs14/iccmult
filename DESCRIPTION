@@ -1,16 +1,12 @@
 Package: iccmult
-Title: Generation of Clustered Categorical Data and Estimation of Intracluster 
-      Correlation Coefficient (ICC) for Nominal and Ordinal Categorical Data
+Title: Intracluster Correlation Coefficient (ICC) in Clustered Categorical Data
 Version: 1.0.0
 Authors@R: 
     person("Nicole", "Solomon", 
           email ="nicole.solomon@duke.edu", 
           role = c("aut", "cre", "cph"),
           comment = c(ORCID = "0000-0002-5643-9958"))
-Description: Assists in generating categorical clustered outcome data, 
-    estimating the Intracluster Correlation Coefficient (ICC) for nominal or 
-    ordinal data with 2+ categories under the resampling and method of moments 
-    (MoM) methods, with confidence intervals.
+Description: Assists in generating categorical clustered outcome data, estimating the Intracluster Correlation Coefficient (ICC) for nominal or ordinal data with 2+ categories under the resampling and method of moments (MoM) methods, with confidence intervals.
 BugReports: https://github.com/ncs14/iccmult/issues/
 License: MIT + file LICENSE
 Imports: 
