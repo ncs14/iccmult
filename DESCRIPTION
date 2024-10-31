@@ -1,6 +1,6 @@
 Package: iccmult
 Title: Intracluster Correlation Coefficient (ICC) in Clustered Categorical Data
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Nicole", "Solomon", 
           email ="nicole.solomon@duke.edu", 
