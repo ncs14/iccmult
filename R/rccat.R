@@ -45,7 +45,10 @@ rccat = function(rho, prop, prvar=0, noc, csize, csvar=0, allevtcl=TRUE,
   if(sum(sapply(prvar, function(x) (x<0 | x>1)))>0){
     stop("Event rate variation must be within [0,1].")
   }
-  if(length(prop)>1 & sum(prop)!=1){
+  if(sum(sapply(prop, function(x) (x<0 | x>1)))>0){
+    stop("Event rate probabilites must be within [0,1].")
+  }
+  if(length(prop)>1 & signif(sum(prop),10)!=1){
     stop("Categorical event rate probabilities must sum to 1.")
   }
 
